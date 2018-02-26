@@ -92,6 +92,9 @@ int main(void)
 	PrintVector(out, n, x);
 	PrintVector(out, n, y);
 
+	InterpolLagrangePol(n, x, y, p);
+	//PrintVector(out, n, p);
+
 	fclose(in);
 	fclose(out);
 	free(x);
