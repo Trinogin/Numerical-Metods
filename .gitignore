@@ -52,7 +52,6 @@ Mkfile.old
 dkms.conf
 
 # Solution files
-*.sln
 *.vcxproj
 *.vcxproj.filters
 *.suo
