@@ -50,3 +50,10 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
+# Solution files
+*.sln
+*.vcxproj
+*.vcxproj.filters
+*.suo
+*.db
