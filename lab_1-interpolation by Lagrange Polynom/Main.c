@@ -1,32 +1,16 @@
 #include<stdlib.h>
 #include<stdio.h>
+#include<math.h>
 #include<vld.h>
+#include"Interface.h"
 #include"Header_Lagrange.h"
 
-// Reading and printing is from 1 to n element. Without 0 in start. 
-void ReadVector(FILE* stream, int n, double* vector)
+double F(double x)
 {
-	int i;
-
-	for (i = 1; i <= n; i++)
-		fscanf(stream, "%lf", &vector[i]);
-}
-
-void PrintVector(FILE* stream, int n, double* vector)
-{
-	int i;
-
-	for (i = 1; i <= n; i++)
-		fprintf(stream, "%.2lf ", vector[i]);
-	fprintf(stream, "\n");
-}
-
-void InterpolLagrangePol(int n, double* x, double* y, double* p)
-{
-	UNUSED_PARAMETER (n);
-	UNUSED_PARAMETER (x);
-	UNUSED_PARAMETER (y);
-	UNUSED_PARAMETER (p);
+	double f_x;
+	// f_x = sin(x);
+	f_x = abs(x);
+	return f_x;
 }
 
 int main(void)
@@ -36,6 +20,7 @@ int main(void)
 	double* x = NULL;
 	double* y = NULL;
 	double* p = NULL;
+	double x_test;
 	FILE* in;
 	FILE* out;
 
@@ -92,11 +77,14 @@ int main(void)
 	PrintVector(out, n, x);
 	PrintVector(out, n, y);
 
-	InterpolLagrangePol(n, x, y, p);
+	x_test = InterpolLagrangePol(n, x, y, 0.0);
 	//PrintVector(out, n, p);
+
+	printf("%lf \n", x_test);
 
 	fclose(in);
 	fclose(out);
+
 	free(x);
 	free(y);
 	free(p);
