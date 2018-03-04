@@ -14,7 +14,7 @@ void PrintVector(FILE* stream, int n, double* vector)
 	int i;
 
 	for (i = 1; i <= n; i++)
-		fprintf(stream, "%.2lf ", vector[i]);
+		fprintf(stream, "%.3lf ", vector[i]);
 	fprintf(stream, "\n");
 }
 
