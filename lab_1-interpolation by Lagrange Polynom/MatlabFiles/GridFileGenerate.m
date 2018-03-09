@@ -2,10 +2,10 @@ clear
 clc
 
 size_points = 1000;
-size_grid = 50;
-
-a = 0.0;
-b = 5.0;
+size_grid = 60;
+%% a,b - border of interval for seraching max epsilon
+a = -1.0;
+b = 1.0;
 
 x_points = linspace(a, b, size_points);
 dlmwrite('x_points.txt', size_points);
@@ -20,3 +20,13 @@ for i = 1 : size_grid
     dlmwrite('x_uniform.txt', x_uniform,'-append','delimiter',' ');
     dlmwrite('x_cheb.txt',x_cheb,'-append','delimiter',' ');
 end
+
+%% For one point
+% 
+% dlmwrite('point_uniform.txt', size_grid);
+% dlmwrite('point_cheb.txt', size_grid);
+% for i = 1 : size_grid
+%     [point_x_uniform, point_x_cheb] = GridMaker(i,a,b);
+%     dlmwrite('point_uniform.txt', point_x_uniform,'-append','delimiter',' ');
+%     dlmwrite('point_cheb.txt',point_x_cheb,'-append','delimiter',' ');
+% end

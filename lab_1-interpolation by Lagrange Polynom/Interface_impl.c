@@ -18,7 +18,8 @@ void PrintVector(FILE* stream, int n, double* vector)
 	fprintf(stream, "\n");
 }
 
-void MemFree(double* p_1, double* p_2, double* p_3, double* p_4, double* p_5, double* p_6)
+void MemFree(double* p_1, double* p_2, double* p_3, double* p_4, double* p_5, double* p_6,
+	double* p_7, double* p_8, double* p_9, double* p_10)
 {
 	if (p_1 != NULL)
 		free(p_1);
@@ -32,9 +33,17 @@ void MemFree(double* p_1, double* p_2, double* p_3, double* p_4, double* p_5, do
 		free(p_5);
 	if (p_6 != NULL)
 		free(p_6);
+	if (p_7 != NULL)
+		free(p_7);
+	if (p_8 != NULL)
+		free(p_8);
+	if (p_9 != NULL)
+		free(p_9);
+	if (p_10 != NULL)
+		free(p_10);
 }
 
-void StreamInClose(FILE* s_1, FILE* s_2, FILE* s_3)
+void StreamInClose(FILE* s_1, FILE* s_2, FILE* s_3, FILE* s_4, FILE* s_5)
 {
 	if (s_1 != NULL)
 		fclose(s_1);
@@ -42,4 +51,8 @@ void StreamInClose(FILE* s_1, FILE* s_2, FILE* s_3)
 		fclose(s_2);
 	if (s_3 != NULL)
 		fclose(s_3);
+	if (s_4 != NULL)
+		fclose(s_4);
+	if (s_5 != NULL)
+		fclose(s_5);
 }
