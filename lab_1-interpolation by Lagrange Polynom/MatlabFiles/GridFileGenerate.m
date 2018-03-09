@@ -22,11 +22,11 @@ for i = 1 : size_grid
 end
 
 %% For one point
-% 
-% dlmwrite('point_uniform.txt', size_grid);
-% dlmwrite('point_cheb.txt', size_grid);
-% for i = 1 : size_grid
-%     [point_x_uniform, point_x_cheb] = GridMaker(i,a,b);
-%     dlmwrite('point_uniform.txt', point_x_uniform,'-append','delimiter',' ');
-%     dlmwrite('point_cheb.txt',point_x_cheb,'-append','delimiter',' ');
-% end
+
+dlmwrite('point_uniform.txt', size_grid);
+dlmwrite('point_cheb.txt', size_grid);
+for i = 1 : size_grid
+    [point_x_uniform, point_x_cheb] = GridMaker(i,a,b);
+    dlmwrite('point_uniform.txt', point_x_uniform,'-append','delimiter',' ');
+    dlmwrite('point_cheb.txt',point_x_cheb,'-append','delimiter',' ');
+end
