@@ -1,6 +1,6 @@
 #include"Header_Lagrange.h"
 
-double InterpolLagrangePol(int n, double*  const x, double* const y, double point_x)
+double InterpolLagrangePol(int n, double* x, double* y, double point_x)
 {
 	double result = 0.0;
 	double mult;
