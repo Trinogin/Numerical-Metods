@@ -1,0 +1,238 @@
+//#include <fstream>
+//#include<iostream>
+//#include <cmath>
+//using namespace std;
+//ifstream input("input.txt");
+//
+//// Display parameters.
+//const int Width = 800;
+//const int Height = 600;
+//const int Border = 10;
+//// X increment on the screen.
+//const int dx_display = 3;
+//
+//class Spline
+//{
+//	// Spline coefficients at every segment.
+//	struct Spline_chunk {
+//		double a, b, c, d, x;
+//	};
+//
+//	int n;                // Number of segments.
+//	Spline_chunk *spline; // Full spline.
+//	double min, max;      // Maximum and minimum spline value.
+//
+//	void Free_memory(void)
+//	{
+//		delete[] spline;
+//		spline = NULL;
+//	}
+//
+//public:
+//	// Constructor.
+//	Spline(const double *x, const double *y, const int n) {
+//		Create_spline(x, y, n);
+//	}
+//	// Destructor.
+//	~Spline(void) {
+//		Free_memory();
+//	}
+//
+//	// Spline creation.
+//	// x — function's arguments, y — function's value,
+//	// n — number of segments.
+//	void Create_spline(const double *x, const double *y, const int n);
+//
+//	// Spline function.
+//	double F(double x);
+//
+//	// Minimum argument's value.
+//	double MinX(void) {
+//		return spline[0].x;
+//	}
+//	// Maximum argument's value.
+//	double MaxX(void) {
+//		return spline[n - 1].x;
+//	}
+//
+//	// Minimum function's value.
+//	double MinY(void) {
+//		return min;
+//	}
+//	// Maximum function's value.
+//	double MaxY(void) {
+//		return max;
+//	}
+//};
+//
+//int main()
+//{
+//	const int n = 7; // Count of points.
+//
+//					  // Function's values.
+//	double x[n], y[n];
+//
+//	// Input function's values.
+//	for (int i = 0; i < n; i++)
+//		cin >> x[i] >> y[i];
+//
+//	// Create spline.
+//	Spline spline(x, y, n);
+//
+//	printf("%lf \n", spline.F(4.0));
+//
+//	return 0;
+//}
+//
+//void Spline::Create_spline(const double *x, const double *y, const int n)
+//{
+//	this->n = n;
+//	spline = new Spline_chunk[n];
+//
+//	int i; // Counter.
+//
+//		   // Initialazing a and x coefficients.
+//	for (i = 0; i < n; i++) {
+//		spline[i].x = x[i];
+//		spline[i].a = y[i];
+//	}
+//
+//	// Calculating c.
+//	spline[0].c = spline[n - 1].c = 0;
+//	// Shuttle coefficients.
+//	double *alpha = new double[n - 1];
+//	double *beta = new double[n - 1];
+//	alpha[0] = beta[0] = 0;
+//	// Calculating shuttle coefficients.
+//	for (i = 1; i < n - 1; i++) {
+//		double h_i = x[i] - x[i - 1], h_i1 = x[i + 1] - x[i];
+//		double A = h_i, C = 2 * (h_i + h_i1), B = h_i1;
+//		double z = A * alpha[i - 1] + C;
+//		alpha[i] = -B / z;
+//		beta[i] = (6 * ((y[i + 1] - y[i]) / h_i1 - (y[i] - y[i - 1]) /
+//			h_i) - A * beta[i - 1]) / z;
+//	}
+//	// Finding solution.
+//	for (i = n - 2; i > 0; i--)
+//		spline[i].c = alpha[i] * spline[i + 1].c + beta[i];
+//	delete[] alpha; delete[] beta;
+//
+//	// Calculating b and d.
+//	for (i = 1; i < n; i++) {
+//		double h_i = x[i] - x[i - 1];
+//		spline[i].b = (y[i] - y[i - 1]) / h_i - h_i * (4 *
+//			spline[i].c - spline[i - 1].c) / 6;
+//		spline[i].d = (spline[i].c - spline[i - 1].c) / h_i;
+//	}
+//	// Coefficients for first spline.
+//	spline[0].b = spline[1].b - spline[1].c * (spline[1].x - spline[0].x) *
+//		(spline[1].x - spline[0].x);
+//	spline[0].d = spline[1].c;
+//
+//	/******************************************************
+//	*  Searching minimum and maximum values of function. *
+//	******************************************************/
+//	// Initializing values
+//	// (spline[].a is a function value on boundary point).
+//	min = max = spline[0].a;
+//
+//	// Find minimum and maximum values of function at the boundary points.
+//	for (Spline_chunk *s = spline; s < spline + n; s++) {
+//		if (s->a < min)
+//			min = s->a;
+//		else if (s->a > max)
+//			max = s->a;
+//	}
+//
+//	// Finding extremum on each segment by using derivative.
+//	for (Spline_chunk *s = spline; s < spline + n; s++) {
+//		// Discriminant of the function's derivative.
+//		double D = (s->c - s->d * s->x) * (s->c - s->d * s->x) -
+//			2. * s->d * (s->b + (s->d * s->x / 2. - s->c) *
+//				s->x);
+//		if (D == 0) {
+//			double dx = -s->c / s->d; // Argument's increment.
+//									  // Calculating function's value at this point.
+//			double y = s->a + (s->b + (s->c / 2. + s->d *
+//				dx / 6.) * dx) * dx;
+//			// Compare with avaliable values.
+//			if (y < min)
+//				min = y;
+//			else if (y > max)
+//				max = y;
+//		}
+//		else if (D > 0) {
+//			// Argument's increments.
+//			double dx1 = (sqrt(D) - s->c) / s->d;
+//			double dx2 = -(sqrt(D) + s->c) / s->d;
+//			// Calculating function's values at this points.
+//			double y1 = s->a + (s->b + (s->c / 2. + s->d *
+//				dx1 / 6.) * dx1) * dx1;
+//			double y2 = s->a + (s->b + (s->c / 2. + s->d *
+//				dx2 / 6.) * dx2) * dx2;
+//			// Sorting these values:
+//			// y1 — minimum, y2 — maximum from them.
+//			if (y1 > y2) {
+//				y1 = y1 + y2;
+//				y2 = y1 - y2;
+//				y1 = y1 - y2;
+//			}
+//			// Compare with avaliable values.
+//			if (y1 < min)
+//				min = y1;
+//			if (y2 > max)
+//				max = y2;
+//		}
+//	}
+//	/*********************
+//	* End of searching. *
+//	*********************/
+//}
+//
+//double Spline::F(double x)
+//{
+//	// Point to a corresponding spline segment.
+//	Spline_chunk *s;
+//
+//	// If x is less than or equal to first array element,
+//	// use first spline chunk.
+//	if (x <= spline[0].x)
+//		s = spline;
+//	// If x is greater than or equal to last array element,
+//	// use last spline chunk.
+//	else if (x >= spline[n - 1].x)
+//		s = spline + (n - 1);
+//	// If x lies between boundary points,
+//	// finding corresponding segment by using binary search.
+//	else {
+//		int a = 0, b = n - 1;
+//		while (b - a > 1) {
+//			int i = (a + b) / 2;
+//			if (x <= spline[i].x)
+//				b = i;
+//			else
+//				a = i;
+//		}
+//		s = spline + a;
+//	}
+//
+//	double dx = x - s->x;
+//	// Return function value.
+//	return s->a + (s->b + (s->c / 2. + s->d * dx / 6.) * dx) * dx;
+//}
+
+#pragma warning(disable:4996)
+
+/ Cubic spline interpolation program
+//when we have two columns of data x and y in input file:
+//
+//x0 y0
+//x1 y1
+//...
+//xn yn
+//
+//and we want to find such function f(x)  
+//where f(xi) = yi
+//and f(x) is cubic function on every [x_k-1, x_k] segment
+//and f(x), f'(x), f''(x) are continual
+//the result is four columns of cubic polinom coefficients
