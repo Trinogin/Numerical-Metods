@@ -6,6 +6,7 @@
 
 #define INTERFACE_H_INCLUDED
 
+#include<cstdlib>
 #include<cstdio>
 
 // Reading and printing is from 1 to n element. Without 0 in start. 

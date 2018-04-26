@@ -16,7 +16,7 @@ int computing(const int size, double* x, double* y, double*h, double* l, double*
 	}
 
 
-	delta[1] = -h[2] / (2 * (h[1] + h[2]));
+	delta[1] = -h[2] / (2.0 * (h[1] + h[2]));
 	lambda[1] = 1.5 * (l[2] - l[1]) / (h[1] + h[2]);
 	for (k = 3; k <= size; k++)
 	{
