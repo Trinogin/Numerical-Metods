@@ -3,7 +3,7 @@
 
 double F(const double x)
 {
-	return sin(x);
+	return sin(x) * cos(x);
 }
 
 double GaussIntegral(const int n, const double a, const double b,
