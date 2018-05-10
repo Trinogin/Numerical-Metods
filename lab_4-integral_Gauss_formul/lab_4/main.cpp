@@ -56,10 +56,13 @@ int main(void)
 
 	while (j <= N)
 	{
+		//integral = GaussIntegral(i, a, b, legandre_roots, weights);
+		//eps = fabs(integral - exact_integral);
+		//fprintf(out, "%.16lf \n", eps);
 		double result = 0.0;
 		double h = (b - a) / (double)j;
 		double prev = a;
-		for (int k = 0; k < j; k++) 
+		for (int k = 0; k < j; k++)
 		{
 			double next = prev + h;
 			result += GaussIntegral(n, prev, next, legandre_roots, weights);
@@ -69,6 +72,7 @@ int main(void)
 		fprintf(out, "%.16lf \n", h);
 		j++;
 	}
+
 
 	fclose(in);
 	fclose(out);

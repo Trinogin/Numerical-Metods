@@ -24,7 +24,7 @@ for i = 1 : N
     temp2 = double(temp);
     weights(i) =  2.0 / ( (1 - roots(i)^2 ) * temp2^2);
 end;
-weights;
+
 %%
 dlmwrite('grid.txt',N);
 dlmwrite('grid.txt',exact_int_d,'-append','precision',16);

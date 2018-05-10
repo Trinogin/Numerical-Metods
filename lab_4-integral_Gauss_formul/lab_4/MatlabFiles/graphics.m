@@ -17,8 +17,12 @@ loglog(P_2(:,2),P_2(:,1));
 %%
 P_3 = load('result_3.txt');
 loglog(P_3(:,2),P_3(:,1));
+n = length(P);
 
+x = 1:n;
 
 ylabel('I-I_h');
 xlabel('h');
 legend('n = 2','n = 3','n = 5','n = 6');
+plot(x,P);
+grid on
